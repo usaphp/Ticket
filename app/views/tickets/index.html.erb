@@ -1,0 +1,62 @@
+<div class="main">
+<div class="logo-w"><a href="#" class="logo fat-font">CheapTickets</a></div>
+<div class="control-w">
+	<div class="dest-w">
+		<%= form_tag('/tickets') do %>
+			<div class="dest-from-w">
+				<%= text_field_tag :from, 'From...', :class => 'i-text' %>
+			</div>
+			<div class="way-select one-way off"><span>&nbsp;</span></div>
+			<div class="way-select two-way on"><span>&nbsp;</span></div>
+			<div class="dest-to-w">
+				<%= text_field_tag :to, 'To...', :class => 'i-text' %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>	
+	<div class="clear"></div>
+	
+	<div class="week-days">
+		<span>Mo</span>
+		<span>Tu</span>
+		<span>We</span>
+		<span>Th</span>
+		<span>Fr</span>
+		<span class="holiday">Sa</span>
+		<span class="holiday">Su</span>
+		<span>Mo</span>
+		<span>Tu</span>
+		<span>We</span>
+		<span>Th</span>
+		<span>Fr</span>
+		<span class="holiday">Sa</span>
+		<span class="holiday">Su</span>
+		<div class="clear"></div>
+	</div>
+	<div class="calendar-h">
+	<div class="calendar-w">
+		<div class="days-w">
+		<% i = 0 %>
+		<% row_i = 0 %>
+		<% odd = '' %>
+		<% @months.each do |month| %>
+			<% (1..31).each do |day| %>
+				<% i+=1 %>
+				<% if [6,7].include?(i) %>
+					<% @class_name = 'day holiday' %>
+					<% i = 0 if i == 7 %>
+				<% else %>
+					<% @class_name = 'day' %>
+				<% end %>
+				<%= "<span class='month #{odd}'>#{month}</span>".html_safe unless (row_i % 14) > 0 %>
+				<span class="<%= @class_name %> <%= odd %>"><%= day %></span>
+				<% row_i = row_i + 1 %>
+			<% end %>
+			<% odd = (odd.empty?)?'odd':'' %>
+		<% end %>
+		<div class="clear"></div>
+		</div>
+	</div>
+	</div>
+</div>
+</div>

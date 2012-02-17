@@ -1,0 +1,10 @@
+/* line 1, ../../app/assets/stylesheets/shared.scss */
+body {
+  background: transparent url(/assets/home-bg.jpg) left top repeat-x;
+}
+
+/* line 2, ../../app/assets/stylesheets/shared.scss */
+.top-bar {
+  background-color: #2B2C33;
+  height: 50px;
+}
