@@ -1,21 +1,46 @@
 <div class="main">
 <div class="logo-w"><a href="#" class="logo fat-font">CheapTickets</a></div>
 <div class="control-w">
-	<div class="dest-w">
+	<div class="dest-w cal-opened">
 		<%= form_tag('/tickets') do %>
 			<div class="dest-from-w">
-				<%= text_field_tag :from, 'From...', :class => 'i-text' %>
+				<%= text_field_tag :from, 'From airport or city...', :class => 'i-text' %>
+				<div class="from-suggest">
+					<ul>
+						<li>
+							<span class="airport-name">Heathrow - </span>
+							<span class="airport-code">(LHR) - </span>
+							<span class="city-name">London</span>
+						</li>
+						<li>
+							<span class="airport-name">Pohkara - </span>
+							<span class="airport-code">(PKR) - </span>
+							<span class="city-name">Nepal</span>
+						</li>	
+
+						<li>
+							<span class="airport-name">Heathrow - </span>
+							<span class="airport-code">(LHR) - </span>
+							<span class="city-name">London</span>
+						</li>
+						<li>
+							<span class="airport-name">Pohkara - </span>
+							<span class="airport-code">(PKR) - </span>
+							<span class="city-name">Nepal</span>
+						</li>					
+					</ul>
+				</div>
 			</div>
 			<div class="way-select one-way off"><span>&nbsp;</span></div>
 			<div class="way-select two-way on"><span>&nbsp;</span></div>
 			<div class="dest-to-w">
-				<%= text_field_tag :to, 'To...', :class => 'i-text' %>
+				<%= text_field_tag :to, 'To airport or city...', :class => 'i-text' %>
 			</div>
 			<div class="clear"></div>
 		<% end %>
 	</div>	
 	<div class="clear"></div>
-	
+	<div id="calendar-holder">
 	<div class="week-days">
 		<span>Mo</span>
 		<span>Tu</span>
@@ -39,6 +64,7 @@
 		<% i = 0 %>
 		<% row_i = 0 %>
 		<% odd = '' %>
+		<% prev_month = '' %>
 		<% @months.each do |month| %>
 			<% (1..31).each do |day| %>
 				<% i+=1 %>
@@ -48,7 +74,14 @@
 				<% else %>
 					<% @class_name = 'day' %>
 				<% end %>
-				<%= "<span class='month #{odd}'>#{month}</span>".html_safe unless (row_i % 14) > 0 %>
+				<% if (row_i % 14) == 0 %>
+					<% if month == prev_month %>
+						<%= "<span class='month #{odd}'>&nbsp;</span>".html_safe %>
+					<% else %>
+						<%= "<span class='month #{odd}'>#{month}</span>".html_safe %>
+					<% end %>
+					<% prev_month = month %>
+				<% end %>
 				<span class="<%= @class_name %> <%= odd %>"><%= day %></span>
 				<% row_i = row_i + 1 %>
 			<% end %>
@@ -56,6 +89,7 @@
 		<% end %>
 		<div class="clear"></div>
 		</div>
+	</div>
 	</div>
 	</div>
 </div>

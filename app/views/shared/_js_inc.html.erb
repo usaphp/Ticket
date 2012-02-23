@@ -1,0 +1,10 @@
+<script>
+	$(function(){
+	<% if(@js_class && @js_functions) %>
+	var my<%= @js_class %> = new <%= @js_class %>();
+	<% @js_functions.each do |js_function| %>
+		my<%= @js_class %>.<%= js_function %>;
+	<% end %>
+	<% end %>
+	});
+</script>
