@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  city_id: 1
+  country_id: 1
+  code_faa_iata: MyString
+  code_icao: MyString
+  latitude: MyString
+  longitude: MyString
+  altitude: MyString
+  ufc_offset: 9.99
+  dst: MyString
+
+two:
+  name: MyString
+  city_id: 1
+  country_id: 1
+  code_faa_iata: MyString
+  code_icao: MyString
+  latitude: MyString
+  longitude: MyString
+  altitude: MyString
+  ufc_offset: 9.99
+  dst: MyString

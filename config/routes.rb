@@ -47,6 +47,11 @@ Ticket::Application.routes.draw do
   #   end
 
   get "tickets/index"
+  
+  
+  get "data/load_airports"
+  get "data/load_cities"
+  get "data/load_countries"
 
   root :to => "tickets#index"
   

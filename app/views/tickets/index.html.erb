@@ -1,11 +1,13 @@
 <div class="main">
-<div class="logo-w"><a href="#" class="logo fat-font">CheapTickets</a></div>
+<div class="logo-w"><a href="#" class="logo fat-font"><img src="http://dummyimage.com/250x100/ffffff/000000" alt="" /></a></div>
 <div class="control-w">
 	<div class="dest-w cal-opened">
 		<%= form_tag('/tickets') do %>
 			<div class="dest-from-w">
-				<%= text_field_tag :from, 'From airport or city...', :class => 'i-text' %>
-				<div class="from-suggest">
+				<label for="" class="dest-label">From</label>
+				<%= text_field_tag :from, 'airport or city...', :class => 'i-text dest-input', "data-placeholder" => 'airport or city...' %>
+				<div class="date-from-w">on <span id="date-from-tag">12 Jan</span></div>
+				<div class="from-suggest suggest-w">
 					<ul>
 						<li>
 							<span class="airport-name">Heathrow - </span>
@@ -31,65 +33,83 @@
 					</ul>
 				</div>
 			</div>
-			<div class="way-select one-way off"><span>&nbsp;</span></div>
-			<div class="way-select two-way on"><span>&nbsp;</span></div>
+			<div class="way-select one-way on"><span>&nbsp;</span></div>
+			<div class="way-select two-way off"><span>&nbsp;</span></div>
 			<div class="dest-to-w">
-				<%= text_field_tag :to, 'To airport or city...', :class => 'i-text' %>
+				<label for="" class="dest-label">To</label>
+				<%= text_field_tag :to, 'airport or city...', :class => 'i-text dest-input', "data-placeholder" => 'airport or city...' %>
+				<div class="date-to-w">back on <span id="date-to-tag">3 Feb</span></div>
+				<div class="to-suggest suggest-w">
+					<ul>
+						<li>
+							<span class="airport-name">Heathrow - </span>
+							<span class="airport-code">(LHR) - </span>
+							<span class="city-name">London</span>
+						</li>
+						<li>
+							<span class="airport-name">Pohkara - </span>
+							<span class="airport-code">(PKR) - </span>
+							<span class="city-name">Nepal</span>
+						</li>	
+
+						<li>
+							<span class="airport-name">Heathrow - </span>
+							<span class="airport-code">(LHR) - </span>
+							<span class="city-name">London</span>
+						</li>
+						<li>
+							<span class="airport-name">Pohkara - </span>
+							<span class="airport-code">(PKR) - </span>
+							<span class="city-name">Nepal</span>
+						</li>					
+					</ul>
+				</div>
+				
 			</div>
 			<div class="clear"></div>
 		<% end %>
 	</div>	
 	<div class="clear"></div>
 	<div id="calendar-holder">
-	<div class="week-days">
-		<span>Mo</span>
-		<span>Tu</span>
-		<span>We</span>
-		<span>Th</span>
-		<span>Fr</span>
-		<span class="holiday">Sa</span>
-		<span class="holiday">Su</span>
-		<span>Mo</span>
-		<span>Tu</span>
-		<span>We</span>
-		<span>Th</span>
-		<span>Fr</span>
-		<span class="holiday">Sa</span>
-		<span class="holiday">Su</span>
-		<div class="clear"></div>
-	</div>
-	<div class="calendar-h">
-	<div class="calendar-w">
-		<div class="days-w">
-		<% i = 0 %>
-		<% row_i = 0 %>
-		<% odd = '' %>
-		<% prev_month = '' %>
-		<% @months.each do |month| %>
-			<% (1..31).each do |day| %>
-				<% i+=1 %>
-				<% if [6,7].include?(i) %>
-					<% @class_name = 'day holiday' %>
-					<% i = 0 if i == 7 %>
-				<% else %>
-					<% @class_name = 'day' %>
-				<% end %>
-				<% if (row_i % 14) == 0 %>
-					<% if month == prev_month %>
-						<%= "<span class='month #{odd}'>&nbsp;</span>".html_safe %>
-					<% else %>
-						<%= "<span class='month #{odd}'>#{month}</span>".html_safe %>
+		<div class="calendar-h">
+			<div class="calendar-w">
+			<% i = 0 %>
+			<% day_counter = 0 %>
+			<% (Date.today.month..Date.today.end_of_year.month).each do |month| %>
+				<% current_month = Date.new(Date.today.year, month, 1) %>
+				<div class="month-w">
+					<div class="month-label"><%= current_month.strftime('%B') %></div>
+					<div class="week-days">
+						<span>Mo</span>
+						<span>Tu</span>
+						<span>We</span>
+						<span>Th</span>
+						<span>Fr</span>
+						<span class="holiday">Sa</span>
+						<span class="holiday">Su</span>
+					</div>
+					<div class="days-w">
+					<% (1..Time.days_in_month(month)).each do |day| %>
+						<% i+=1 %>
+						<% day_counter+=1 %>
+						<% if [6,7].include?(i) %>
+							<% @class_name = 'day holiday' %>
+							<% i = 0 if i == 7 %>
+						<% else %>
+							<% @class_name = 'day' %>
+						<% end %>
+						<span class="<%= @class_name %>" data-day-id="<%= day_counter %>" data-day-name="<%= day.to_s + " " + current_month.strftime('%b') %>"><%= day %></span>
 					<% end %>
-					<% prev_month = month %>
-				<% end %>
-				<span class="<%= @class_name %> <%= odd %>"><%= day %></span>
-				<% row_i = row_i + 1 %>
+					</div>
+				<% i = 0 %>
+				</div>
 			<% end %>
-			<% odd = (odd.empty?)?'odd':'' %>
-		<% end %>
-		<div class="clear"></div>
+			<div class="clear"></div>
+			</div>
 		</div>
-	</div>
+		<%= hidden_field_tag :hid_date_from, nil %>
+		<%= hidden_field_tag :hid_date_to, nil %>
+		<%= hidden_field_tag :hid_date_active, :from %>
 	</div>
 	</div>
 </div>
