@@ -41,6 +41,10 @@ module Ticket
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.precompile += ['*.css', '*.js']
+    
+    config.sass.load_paths << "#{Rails.root}/app/assets/stylesheets"
+    config.sass.load_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
