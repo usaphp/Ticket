@@ -8,7 +8,6 @@ gem 'rails', '3.1.1'
 gem 'mysql2'
 gem 'sass-rails',   '~> 3.1.4'
 gem 'compass', ">= 0.11.5"
-gem 'pg'
 gem 'admin_data', '>= 1.1.16'
 gem 'coffee-rails', '~> 3.1.1'
 
