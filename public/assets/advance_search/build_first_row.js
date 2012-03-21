@@ -1,0 +1,1 @@
+$(function(){var a=$.parseJSON($("#primary_column_type_info").html());$("#advance_search_table").data("table_structure",a),AdminData.advanceSearch.buildFirstRow()});
