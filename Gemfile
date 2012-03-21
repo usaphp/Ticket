@@ -6,13 +6,15 @@ gem 'rails', '3.1.1'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'sass-rails',   '~> 3.1.4'
+gem 'compass', ">= 0.11.5"
+gem 'pg'
+gem 'admin_data', '>= 1.1.16'
+gem 'coffee-rails', '~> 3.1.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
