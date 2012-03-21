@@ -41,6 +41,7 @@ module Ticket
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.compile = true
     config.assets.precompile << '*.js'
     config.assets.precompile << '*.css'
     
